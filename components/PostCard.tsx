@@ -3,9 +3,18 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 
 const PostCardWrapper = styled.div`
-	padding: 8px 0;
 	margin: 12px 0;
-	width: 500px;
+	width: 33%;
+	@media (max-width: 800px) {
+		background-color: tomato;
+		width: 50%;
+	}
+
+	@media (max-width: 500px) {
+		background-color: white;
+		width: 100%;
+	}
+
 	border: 1px solid red;
 	position: relative;
 	display: flex;
@@ -15,7 +24,6 @@ const PostCardWrapper = styled.div`
 
 	.post-copy {
 		width: 100%;
-		padding-right: 24px;
 	}
 
 	.post-title {
@@ -92,8 +100,8 @@ const PostCardWrapper = styled.div`
 
 		.post-image {
 			transition: 0.2s ease;
-			width: 105%;
-			height: 105%;
+			width: 110%;
+			height: 110%;
 		}
 	}
 `;

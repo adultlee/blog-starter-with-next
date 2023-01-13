@@ -2,19 +2,16 @@ import PostCard from "./PostCard";
 import styled from "@emotion/styled";
 const List = styled.div`
 	display: flex;
-	flex-wrap: wrap;
 	width: 100%;
-	column-gap: 2.8vw;
-	row-gap: 20px;
 	align-items: center;
-	justify-content: start;
-	border: 1px solid green;
+	justify-content: space-between;
+	border: 1px solid red;
+	flex-wrap: wrap;
 `;
 
 const PostList = () => {
 	return (
 		<List>
-			<PostCard />
 			<PostCard />
 			<PostCard />
 			<PostCard />

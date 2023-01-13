@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-
 import Header from "./Header";
 import styled from "@emotion/styled";
 
@@ -12,14 +11,18 @@ const LayoutContainer = styled.div`
 	height: auto;
 	.contents {
 		width: 100%;
-		max-width: 1140px;
-		margin: 0 auto;
 		padding: 40px 22px 0;
+		max-width: 1200px;
+		margin: 0 auto;
 		display: flex;
+		border: 1px solid green;
 	}
 `;
 
-export const Main = styled.main``;
+export const Main = styled.main`
+	width: 85%;
+	margin: 0 auto;
+`;
 
 const Layout = ({ children }: Props) => {
 	return (
