@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
+import Link from "next/link";
 
 const PostCardWrapper = styled.div`
 	margin: 12px 0;
@@ -14,7 +15,6 @@ const PostCardWrapper = styled.div`
 		background-color: white;
 		width: 100%;
 	}
-
 	border: 1px solid red;
 	position: relative;
 	display: flex;
@@ -106,27 +106,24 @@ const PostCardWrapper = styled.div`
 	}
 `;
 
-const PostCard = () => {
+type PostCardProps = {
+	title: string;
+	description: string;
+	slug: string;
+};
+
+const PostCard = ({ title, description, slug }: PostCardProps) => {
 	return (
 		<PostCardWrapper>
-			<div className="post-copy">
-				<div className="post-image">
-					<img src="https://velog.velcdn.com/images/adultlee/post/8f66e8c2-132a-48e4-adc4-8398607dba89/image.png"></img>
+			<Link href={`/blog/${slug}`} passHref>
+				<div className="post-copy">
+					<div className="post-image">
+						<img src="https://velog.velcdn.com/images/adultlee/post/8f66e8c2-132a-48e4-adc4-8398607dba89/image.png"></img>
+					</div>
+					<p className="post-title">{title}</p>
+					<p className="post-desc">{description}</p>
 				</div>
-				<p className="post-title">
-					글
-					제목djasflkasjdf;lkjasdf;ljkasdfl;jkasd;lfjkasl;djfsadkmlnsa;dlflas;fdjasfl;kj
-				</p>
-				<p className="post-desc">
-					글의 요약sadjfo aposdiutpoashd topashit poasdhi opashidt
-					opasdhi opahsid lkajs l;kzjx cl;kjzx l;ja dsflkj
-					asdofhiapeoth글의 요약sadjfo aposdiutpoashd topashit poasdhi
-					opashidt opasdhi opahsid lkajs l;kzjx cl;kjzx l;ja dsflkj
-					asdofhiapeoth글의 요약sadjfo aposdiutpoashd topashit poasdhi
-					opashidt opasdhi opahsid lkajs l;kzjx cl;kjzx l;ja dsflkj
-					asdofhiapeoth
-				</p>
-			</div>
+			</Link>
 		</PostCardWrapper>
 	);
 };
