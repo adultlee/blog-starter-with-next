@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 
 export type TextProps = {
 	color: string;
-	size: string;
-	weight: string;
+	size: number;
+	weight: number;
 };
 
 const Text = styled.p<TextProps>`
