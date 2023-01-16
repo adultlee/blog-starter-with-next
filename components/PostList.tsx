@@ -1,5 +1,7 @@
 import PostCard from "./PostCard";
 import styled from "@emotion/styled";
+import { allPosts, Post } from "../.contentlayer/generated";
+
 const List = styled.div`
 	display: flex;
 	width: 100%;
@@ -9,12 +11,18 @@ const List = styled.div`
 	flex-wrap: wrap;
 `;
 
-const PostList = () => {
+const PostList = ({ posts }: { posts: Post[] }) => {
 	return (
 		<List>
-			<PostCard />
-			<PostCard />
-			<PostCard />
+			{posts &&
+				posts.map((post, index) => (
+					<PostCard
+						key={index}
+						title={post.title}
+						description={post.description}
+						slug={post.slug}
+					/>
+				))}
 		</List>
 	);
 };
