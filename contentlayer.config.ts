@@ -23,6 +23,10 @@ export const Post = defineDocumentType(() => ({
 			of: { type: "string" },
 			default: [],
 		},
+		thumbnail: {
+			type: "string",
+			required: true,
+		},
 	},
 	computedFields: {
 		url: {

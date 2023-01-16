@@ -15,7 +15,6 @@ const LayoutContainer = styled.div`
 		max-width: 1200px;
 		margin: 0 auto;
 		display: flex;
-		border: 1px solid green;
 	}
 `;
 

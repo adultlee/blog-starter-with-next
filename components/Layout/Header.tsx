@@ -7,7 +7,7 @@ export const TopBarContainer = styled.header`
 	height: 46px;
 	width: 100%;
 	backdrop-filter: saturate(180%) blur(20px);
-	background-color: black;
+	background-color: #0f0317;
 
 	.container {
 		width: 100%;

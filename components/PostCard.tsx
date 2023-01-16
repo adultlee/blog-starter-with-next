@@ -2,61 +2,38 @@ import React from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const PostCardWrapper = styled.div`
 	margin: 12px 0;
-	width: 33%;
-	@media (max-width: 800px) {
-		background-color: tomato;
-		width: 50%;
+	width: 300px;
+	min-height: 300px;
+	background-color: #170524;
+	@media (max-width: 750px) {
+		width: 100%;
+		min-height: 330px;
 	}
 
-	@media (max-width: 500px) {
-		background-color: white;
-		width: 100%;
-	}
-	border: 1px solid red;
 	position: relative;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	transition: 0.2s ease;
-
-	.post-copy {
-		width: 100%;
-	}
+	overflow: hidden;
 
 	.post-title {
 		display: inline-block;
 		position: relative;
 		font-size: 24px;
 		width: 100%;
-		border: 1px solid red;
-		transition: 0.2s ease;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		&:before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 0;
-			width: 8px;
-			height: 8px;
-			border-right: 2px solid #8a4d3c;
-			border-bottom: 2px solid #fb673e;
-			margin-right: 10px;
-			transition: 0.4s ease;
-			transform: translateY(-50%) rotate(-45deg);
-			opacity: 0;
-		}
+		color: #e0bcff;
 	}
 	.post-desc {
+		color: #e0bcff;
 		font-size: 18px;
-		margin-top: 8px;
-
-		max-height: 100px;
+		margin-top: 5px;
 		line-height: 1.57;
 		opacity: 0.5;
+		width: auto;
 
 		/* 한 줄 자르기 */
 		display: inline-block;
@@ -65,21 +42,22 @@ const PostCardWrapper = styled.div`
 		overflow: hidden;
 		text-overflow: ellipsis;
 
-		/* 여러 줄 자르기 추가 스타일 */
+		// 여러 줄 자르기 추가 스타일
 		white-space: normal;
 		line-height: 1.2;
-		height: 3.6em;
+
 		text-align: left;
 		word-wrap: break-word;
 		display: -webkit-box;
-		-webkit-line-clamp: 3;
+		-webkit-line-clamp: 5;
 		-webkit-box-orient: vertical;
 	}
+
 	.post-image {
 		width: 100%;
-		height: 100%;
-		border-radius: 20px;
+		height: 150px;
 		overflow: hidden;
+		background-color: white;
 		img {
 			width: 100%;
 			height: 100%;
@@ -87,21 +65,48 @@ const PostCardWrapper = styled.div`
 	}
 
 	&:hover {
+		transform: scale(1.1);
 		opacity: 0.6;
 		transition: 0.2s ease;
-		.post-title {
-			color: #fb673e;
-			padding-left: 28px;
-			&:before {
-				opacity: 1;
-				color: #fb673e;
-			}
-		}
 
 		.post-image {
-			transition: 0.2s ease;
-			width: 110%;
-			height: 110%;
+			transition: 0.3s ease;
+		}
+	}
+
+	&::before,
+	&::after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: opacity 0.38s ease-in-out, transform 0.35s ease-in-out;
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&::before {
+		transform: scale3d(0, 1, 1);
+		transform-origin: left top;
+		border-top: 2px solid #e0bcff;
+		border-bottom: 2px solid #e0bcff;
+	}
+
+	&::after {
+		transform: scale3d(1, 0, 1);
+		transform-origin: right top;
+		border-right: 2px solid #e0bcff;
+		border-left: 2px solid #e0bcff;
+	}
+
+	&:hover,
+	&:focus {
+		&::before,
+		&::after {
+			transform: scale3d(1, 1, 1);
+			opacity: 1;
 		}
 	}
 `;
@@ -109,23 +114,28 @@ const PostCardWrapper = styled.div`
 type PostCardProps = {
 	title: string;
 	description: string;
+	thumbnail: string;
 	slug: string;
 };
 
-const PostCard = ({ title, description, slug }: PostCardProps) => {
+const PostCard = ({ title, description, thumbnail, slug }: PostCardProps) => {
+	const router = useRouter();
+
+	const handleClick = (e: { preventDefault: () => void }) => {
+		e.preventDefault();
+		router.push(`/blog/${slug}`);
+	};
 	return (
-		<PostCardWrapper>
-			<Link href={`/blog/${slug}`} passHref>
-				<div className="post-copy">
-					<div className="post-image">
-						<img src="https://velog.velcdn.com/images/adultlee/post/8f66e8c2-132a-48e4-adc4-8398607dba89/image.png"></img>
-					</div>
-					<p className="post-title">{title}</p>
-					<p className="post-desc">{description}</p>
-				</div>
-			</Link>
+		<PostCardWrapper onClick={handleClick}>
+			<div className="post-image">
+				<img src={thumbnail} />
+			</div>
+			<div className="post-title">{title}</div>
+			<div className="post-desc">{description}</div>
 		</PostCardWrapper>
 	);
 };
+
+//https://velog.velcdn.com/images/adultlee/post/94c4031f-432d-462b-b91f-181efee2c0df/image.png
 
 export default PostCard;
