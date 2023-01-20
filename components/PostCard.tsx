@@ -1,79 +1,168 @@
 import React from "react";
 import styled from "@emotion/styled";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Text from "./Text";
-
 const PostCardWrapper = styled.div`
-	padding: 8px 0;
 	margin: 12px 0;
-	position: relative;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	transition: 0.2s ease;
-	border: 1px solid white;
-	.post-copy {
-		padding-right: 24px;
+	width: 300px;
+	min-height: 330px;
+	background-color: #170524;
+
+	@media (max-width: 750px) {
+		width: 100%;
+		min-height: 330px;
 	}
 
-	.post-title {
-		display: inline-block;
-		position: relative;
-		font-size: 24px;
-		transition: 0.2s ease;
-		&:before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 0;
-			width: 8px;
-			height: 8px;
-			border-right: 2px solid #fb673e;
-			border-bottom: 2px solid #fb673e;
-			margin-right: 10px;
-			transition: 0.4s ease;
-			transform: translateY(-50%) rotate(-45deg);
-			opacity: 0;
-		}
-	}
-	.post-desc {
-		font-size: 18px;
-		margin-top: 8px;
-		line-height: 1.57;
-		opacity: 0.5;
-	}
-	.post-image {
-		min-width: 160px;
-		width: 160px;
-		height: 90px;
-		border-radius: 4px;
-		overflow: hidden;
-		img {
-			width: 100%;
-			height: 100%;
-		}
-	}
+	position: relative;
+	transition: 0.2s ease;
+	overflow: hidden;
+	cursor: pointer;
 
 	&:hover {
+		transform: scale(1.1);
 		opacity: 0.6;
+		transition: 0.2s ease;
 
-		.post-title {
-			color: #fb673e;
-			padding-left: 28px;
-			&:before {
-				opacity: 1;
-				color: #fb673e;
-			}
+		.post-image {
+			transition: 0.3s ease;
+		}
+	}
+
+	&::before,
+	&::after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: opacity 0.38s ease-in-out, transform 0.35s ease-in-out;
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&::before {
+		transform: scale3d(0, 1, 1);
+		transform-origin: left top;
+		border-top: 3px solid #e0bcff;
+		border-bottom: 3px solid #e0bcff;
+	}
+
+	&::after {
+		transform: scale3d(1, 0, 1);
+		transform-origin: right top;
+		border-right: 3px solid #e0bcff;
+		border-left: 3px solid #e0bcff;
+	}
+
+	&:hover,
+	&:focus {
+		&::before,
+		&::after {
+			transform: scale3d(1, 1, 1);
+			opacity: 1;
 		}
 	}
 `;
 
-const PostCard = () => {
+type PostCardProps = {
+	title: string;
+	description: string;
+	thumbnail: string;
+	slug: string;
+};
+
+type ImageType = {
+	src: string;
+};
+
+const PostImage = styled.div`
+	width: 100%;
+	height: 150px;
+	overflow: hidden;
+	background-color: white;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+`;
+
+const PostTitle = styled.div`
+	display: inline-block;
+	position: relative;
+	font-size: 24px;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #e0bcff;
+	margin: 5px;
+`;
+
+const PostDescripption = styled.div`
+	color: #e0bcff;
+	font-size: 18px;
+	margin-top: 5px;
+	line-height: 1.57;
+	opacity: 0.5;
+	width: auto;
+	display: inline-block;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1.2;
+	text-align: left;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	margin: 0px 5px;
+`;
+
+const PostProfileWrapper = styled.div`
+	display: flex;
+	margin: 20px 5px 3px;
+`;
+
+const PostProfileImage = styled.div<ImageType>`
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	display: flex;
+	margin-right: 10px;
+	border: 1px solid rgb(163, 151, 198);
+	background-size: contain;
+	background-image: url(${(props) => props.src});
+`;
+
+const PostProfileText = styled(Text)``;
+
+const PostCard = ({ title, description, thumbnail, slug }: PostCardProps) => {
+	const router = useRouter();
+
+	const handleClick = (e: { preventDefault: () => void }) => {
+		e.preventDefault();
+		router.push(`/blog/${slug}`);
+	};
+
 	return (
-		<PostCardWrapper>
-			<div className="post-copy">
-				<p className="post-title">글 제목</p>
-				<p className="post-desc">글의 요약</p>
-			</div>
+		<PostCardWrapper onClick={handleClick}>
+			<PostImage className="post-image">
+				<img src={thumbnail} />
+			</PostImage>
+			<PostTitle className="post-title">{title}</PostTitle>
+			<PostDescripption className="post-desc">
+				{description}
+			</PostDescripption>
+			<PostProfileWrapper>
+				<PostProfileImage src={thumbnail} />
+				<PostProfileText color="#f9f1ff" size={16} weight={400}>
+					author
+				</PostProfileText>
+			</PostProfileWrapper>
 		</PostCardWrapper>
 	);
 };

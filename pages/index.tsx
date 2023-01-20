@@ -1,13 +1,18 @@
 import type { NextPage } from "next";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout/Layout";
-import RecentPost from "../components/PostCard";
+import PostList from "../components/PostList";
+import { allPosts, Post } from "../.contentlayer/generated";
 
-const Home: NextPage = () => {
+export const getStaticProps = async () => {
+	const posts: Post[] = allPosts;
+
+	return { props: { posts } };
+};
+
+const Home = ({ posts }: { posts: Post[] }) => {
 	return (
 		<Layout>
-			<RecentPost />
+			<PostList posts={posts} />
 		</Layout>
 	);
 };
