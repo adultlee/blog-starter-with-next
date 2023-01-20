@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Text from "./Text";
+import TeamMembersMetaData from "../data/teamMembers";
+import { useState, useEffect } from "react";
 const PostCardWrapper = styled.div`
 	margin: 12px 0;
 	width: 300px;
@@ -77,18 +77,16 @@ type PostCardProps = {
 };
 
 type ImageType = {
-	src: string;
+	src?: string;
 };
 
-const PostImage = styled.div`
+const PostImage = styled.div<ImageType>`
 	width: 100%;
 	height: 150px;
 	overflow: hidden;
-	background-color: white;
-	img {
-		width: 100%;
-		height: 100%;
-	}
+	background-size: cover;
+	background-image: url(${(props) => props.src});
+	background-repeat: no-repeat;
 `;
 
 const PostTitle = styled.div`
@@ -142,8 +140,9 @@ const PostProfileImage = styled.div<ImageType>`
 	display: flex;
 	margin-right: 10px;
 	border: 1px solid rgb(163, 151, 198);
-	background-size: contain;
+	background-size: cover;
 	background-image: url(${(props) => props.src});
+	background-repeat: no-repeat;
 `;
 
 const PostProfileText = styled(Text)``;
@@ -161,7 +160,20 @@ const PostCard = ({
 	publishedAt,
 }: PostCardProps) => {
 	const router = useRouter();
+	const [profileThumbnail, setProfileThumbnail] = useState<
+		string | undefined
+	>("");
 
+	useEffect(() => {
+		for (let data of TeamMembersMetaData) {
+			if (data.name === author) {
+				setProfileThumbnail(data.thumbnail);
+				return;
+			}
+		}
+	}, [author]);
+
+	console.log(profileThumbnail);
 	const handleClick = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		router.push(`/blog/${slug}`);
@@ -169,16 +181,14 @@ const PostCard = ({
 
 	return (
 		<PostCardWrapper onClick={handleClick}>
-			<PostImage className="post-image">
-				<img src={thumbnail} />
-			</PostImage>
+			<PostImage className="post-image" src={thumbnail} />
 			<PostTitle className="post-title">{title}</PostTitle>
 			<PostDescripption className="post-desc">
 				{description}
 			</PostDescripption>
 			<PostFootterWrapper>
 				<PostProfileWrapper>
-					<PostProfileImage src={thumbnail} />
+					<PostProfileImage src={profileThumbnail} />
 					<PostProfileText color="#f9f1ff" size={16} weight={400}>
 						{author}
 					</PostProfileText>
