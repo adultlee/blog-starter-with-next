@@ -22,6 +22,7 @@ const PostList = ({ posts }: { posts: Post[] }) => {
 						description={post.description}
 						thumbnail={post.thumbnail}
 						slug={post.slug}
+						author={post.author}
 					/>
 				))}
 		</List>

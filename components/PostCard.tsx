@@ -72,6 +72,7 @@ type PostCardProps = {
 	description: string;
 	thumbnail: string;
 	slug: string;
+	author: string;
 };
 
 type ImageType = {
@@ -140,7 +141,13 @@ const PostProfileImage = styled.div<ImageType>`
 
 const PostProfileText = styled(Text)``;
 
-const PostCard = ({ title, description, thumbnail, slug }: PostCardProps) => {
+const PostCard = ({
+	title,
+	description,
+	thumbnail,
+	slug,
+	author,
+}: PostCardProps) => {
 	const router = useRouter();
 
 	const handleClick = (e: { preventDefault: () => void }) => {
@@ -160,7 +167,7 @@ const PostCard = ({ title, description, thumbnail, slug }: PostCardProps) => {
 			<PostProfileWrapper>
 				<PostProfileImage src={thumbnail} />
 				<PostProfileText color="#f9f1ff" size={16} weight={400}>
-					author
+					{author}
 				</PostProfileText>
 			</PostProfileWrapper>
 		</PostCardWrapper>
