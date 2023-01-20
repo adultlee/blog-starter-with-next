@@ -4,7 +4,10 @@ import PostList from "../components/PostList";
 import { allPosts, Post } from "../.contentlayer/generated";
 
 export const getStaticProps = async () => {
-	const posts: Post[] = allPosts;
+	const posts: Post[] = allPosts.sort((a, b) => {
+		if (a.publishedAt > b.publishedAt) return -1;
+		else return 1;
+	});
 
 	return { props: { posts } };
 };

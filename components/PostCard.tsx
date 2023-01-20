@@ -73,6 +73,7 @@ type PostCardProps = {
 	thumbnail: string;
 	slug: string;
 	author: string;
+	publishedAt: string;
 };
 
 type ImageType = {
@@ -123,9 +124,15 @@ const PostDescripption = styled.div`
 	margin: 0px 5px;
 `;
 
+const PostFootterWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin: 15px 5px;
+`;
+
 const PostProfileWrapper = styled.div`
 	display: flex;
-	margin: 20px 5px 3px;
+	justify-content: space-around;
 `;
 
 const PostProfileImage = styled.div<ImageType>`
@@ -141,12 +148,17 @@ const PostProfileImage = styled.div<ImageType>`
 
 const PostProfileText = styled(Text)``;
 
+const PostDateText = styled(Text)`
+	margin-right: 15px;
+`;
+
 const PostCard = ({
 	title,
 	description,
 	thumbnail,
 	slug,
 	author,
+	publishedAt,
 }: PostCardProps) => {
 	const router = useRouter();
 
@@ -164,12 +176,17 @@ const PostCard = ({
 			<PostDescripption className="post-desc">
 				{description}
 			</PostDescripption>
-			<PostProfileWrapper>
-				<PostProfileImage src={thumbnail} />
-				<PostProfileText color="#f9f1ff" size={16} weight={400}>
-					{author}
-				</PostProfileText>
-			</PostProfileWrapper>
+			<PostFootterWrapper>
+				<PostProfileWrapper>
+					<PostProfileImage src={thumbnail} />
+					<PostProfileText color="#f9f1ff" size={16} weight={400}>
+						{author}
+					</PostProfileText>
+				</PostProfileWrapper>
+				<PostDateText color="#f9f1ff" size={16} weight={400}>
+					{publishedAt}
+				</PostDateText>
+			</PostFootterWrapper>
 		</PostCardWrapper>
 	);
 };

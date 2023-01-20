@@ -23,6 +23,7 @@ const PostList = ({ posts }: { posts: Post[] }) => {
 						thumbnail={post.thumbnail}
 						slug={post.slug}
 						author={post.author}
+						publishedAt={post.publishedAt}
 					/>
 				))}
 		</List>
