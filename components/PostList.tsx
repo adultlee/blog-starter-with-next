@@ -1,7 +1,6 @@
 import PostCard from "./PostCard";
 import styled from "@emotion/styled";
 import { Post } from "../.contentlayer/generated";
-import Link from "next/link";
 
 const List = styled.div`
 	display: flex;

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const PostCardWrapper = styled.div`
 	margin: 12px 0;
 	width: 300px;
-	min-height: 300px;
+	min-height: 330px;
 	background-color: #170524;
 	@media (max-width: 750px) {
 		width: 100%;
@@ -90,15 +90,15 @@ const PostCardWrapper = styled.div`
 	&::before {
 		transform: scale3d(0, 1, 1);
 		transform-origin: left top;
-		border-top: 2px solid #e0bcff;
-		border-bottom: 2px solid #e0bcff;
+		border-top: 3px solid #e0bcff;
+		border-bottom: 3px solid #e0bcff;
 	}
 
 	&::after {
 		transform: scale3d(1, 0, 1);
 		transform-origin: right top;
-		border-right: 2px solid #e0bcff;
-		border-left: 2px solid #e0bcff;
+		border-right: 3px solid #e0bcff;
+		border-left: 3px solid #e0bcff;
 	}
 
 	&:hover,
@@ -125,6 +125,7 @@ const PostCard = ({ title, description, thumbnail, slug }: PostCardProps) => {
 		e.preventDefault();
 		router.push(`/blog/${slug}`);
 	};
+
 	return (
 		<PostCardWrapper onClick={handleClick}>
 			<div className="post-image">
@@ -135,7 +136,5 @@ const PostCard = ({ title, description, thumbnail, slug }: PostCardProps) => {
 		</PostCardWrapper>
 	);
 };
-
-//https://velog.velcdn.com/images/adultlee/post/94c4031f-432d-462b-b91f-181efee2c0df/image.png
 
 export default PostCard;
