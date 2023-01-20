@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Text from "./Text";
 import TeamMembersMetaData from "../data/teamMembers";
 import { useState, useEffect } from "react";
+
 const PostCardWrapper = styled.div`
 	margin: 12px 0;
 	width: 300px;
@@ -173,7 +174,6 @@ const PostCard = ({
 		}
 	}, [author]);
 
-	console.log(profileThumbnail);
 	const handleClick = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		router.push(`/blog/${slug}`);
