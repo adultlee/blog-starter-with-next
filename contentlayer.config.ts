@@ -27,6 +27,10 @@ export const Post = defineDocumentType(() => ({
 			type: "string",
 			required: true,
 		},
+		author: {
+			type: "string",
+			required: true,
+		},
 	},
 	computedFields: {
 		url: {
