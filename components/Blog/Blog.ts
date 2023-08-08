@@ -73,7 +73,7 @@ export const BlogContainer = styled.div`
 
 	pre {
 		padding: 10px 16px;
-		width: 100%
+		width: 100%;
 		font-size: 17px;
 		font-weight: 500;
 		border-radius: 5px;
@@ -157,5 +157,4 @@ export const BlogTitle = styled.h1`
 
 export const BlogContent = styled.div`
 	margin-top: 36px;
-]
 `;

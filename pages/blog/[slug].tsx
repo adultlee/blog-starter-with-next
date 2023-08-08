@@ -8,7 +8,7 @@ import {
 	BlogContainer,
 } from "../../components/Blog/Blog";
 
-const PostPage = ({ posts }: { posts: Post[] }) => {
+const PostPage = ({ posts }: { posts: Post }) => {
 	const MDXComponent = useMDXComponent(posts.body.code);
 
 	return (

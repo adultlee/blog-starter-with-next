@@ -10,12 +10,12 @@ export const getStaticProps = async () => {
 	return { props: { posts } };
 };
 
-const Home = ({ posts }: { posts: Post[] }) => {
+const Blog = ({ posts }: { posts: Post[] }) => {
 	return (
 		<Layout>
-			<>이곳은 메인페이지 입니다. 팀 소개가 작성될 예정입니다.</>
+			<div>blog</div>
 		</Layout>
 	);
 };
 
-export default Home;
+export default Blog;
