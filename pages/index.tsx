@@ -1,6 +1,7 @@
 import Layout from "../components/Layout/Layout";
 import { allPosts, Post } from "../.contentlayer/generated";
-
+import Bio from "components/Bio";
+import TechStack from "components/TexhStack";
 export const getStaticProps = async () => {
 	const posts: Post[] = allPosts.sort((a, b) => {
 		if (a.publishedAt > b.publishedAt) return -1;
@@ -13,7 +14,10 @@ export const getStaticProps = async () => {
 const Home = ({ posts }: { posts: Post[] }) => {
 	return (
 		<Layout>
-			<>이곳은 메인페이지 입니다. 팀 소개가 작성될 예정입니다.</>
+			<>
+				<Bio />
+				<TechStack />
+			</>
 		</Layout>
 	);
 };
