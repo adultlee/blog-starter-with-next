@@ -4,35 +4,30 @@ const TimestampSectionWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	box-sizing: border-box;
 	justify-content: center;
 	width: 100%;
-
 	margin-bottom: 50px;
+	padding: 0px 40px;
 	word-break: keep-all;
-
+	box-sizing: border-box;
+	.header {
+		width: 100%;
+		font-size: 28px;
+		font-weight: 600;
+	}
 	.body {
 		width: 100%;
 		padding: 0 10px;
-
+		box-sizing: border-box;
 		.timestamp {
 			display: flex;
 			justify-items: center;
-
 			width: 100%;
 			margin-left: 5px;
 			padding: 10px 0;
-			border-left: 2px solid #bdbdbd;
-
 			font-size: 18px;
 			font-weight: 400;
-
-			&:first-child {
-				padding-top: 7px;
-			}
-
-			&:last-child {
-				padding-bottom: 7px;
-			}
 
 			&::before {
 				position: relative;
@@ -41,7 +36,6 @@ const TimestampSectionWrapper = styled.div`
 				align-self: center;
 				width: 10px;
 				height: 10px;
-				background-color: var(--background-color);
 				border-radius: 10px;
 				transform: translatex(-50%);
 				border: 2px solid #828282;
@@ -54,11 +48,6 @@ const TimestampSectionWrapper = styled.div`
 				min-width: 115px;
 				color: #828282;
 				align-self: center;
-
-				@media (min-width: 768px) {
-					width: 200px;
-					min-width: 200px;
-				}
 			}
 
 			.activity {
@@ -72,14 +61,13 @@ const TimestampSectionWrapper = styled.div`
 const TimestampDate = styled.div`
 	margin-left: 5px;
 	margin-right: 5px;
-	width: 115px;
-	min-width: 115px;
+	width: 120px;
+	min-width: 120px;
 	color: #828282;
 	align-self: center;
-
 	@media (min-width: 768px) {
-		width: 200px;
-		min-width: 200px;
+		width: 220px;
+		min-width: 220px;
 	}
 `;
 
@@ -112,17 +100,16 @@ function TimeStampSection({ timestamps }: TimeStampSectionProps) {
 
 	return (
 		<TimestampSectionWrapper>
+			<h1 className="header">TimeStamp</h1>
 			<div className="body">
-				{timestamps.map((timestamp, index) =>
-					index === 0 ? null : (
-						<Timestamp
-							key={index}
-							date={timestamp.date}
-							activity={timestamp.activity}
-							links={timestamp.links}
-						/>
-					)
-				)}
+				{timestamps.map((timestamp, index) => (
+					<Timestamp
+						key={index}
+						date={timestamp.date}
+						activity={timestamp.activity}
+						links={timestamp.links}
+					/>
+				))}
 			</div>
 		</TimestampSectionWrapper>
 	);
