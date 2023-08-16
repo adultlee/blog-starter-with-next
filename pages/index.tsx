@@ -132,7 +132,7 @@ const Home = ({ posts }: { posts: Post[] }) => {
 		<Layout>
 			<>
 				<Bio />
-				<TechStack stackList={techStackData} />
+				{/* <TechStack stackList={techStackData} />
 				<TimeStampSection timestamps={timestamps} />
 				<DescriptionWithPhoto
 					title="특별한 정보를 담습니다!"
@@ -148,7 +148,7 @@ const Home = ({ posts }: { posts: Post[] }) => {
 							description={profile.description}
 						/>
 					))}
-				</Carousel>
+				</Carousel> */}
 			</>
 		</Layout>
 	);
